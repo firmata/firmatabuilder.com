@@ -1,0 +1,11 @@
+body {
+  margin-bottom: 50px;
+}
+
+.container {
+  width: 800px !important;
+}
+
+.contribDependencies {
+  margin-left: 20px;
+}
