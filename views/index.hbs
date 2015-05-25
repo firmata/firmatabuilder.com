@@ -11,7 +11,7 @@
 
   <h3>How to use Firmata Builder</h3>
 
-  <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your Arduino/libraries/ folder. The latest version is {{this.version}}.</p>
+  <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your <code>Arduino/libraries/</code> folder. The latest version is {{this.version}}.</p>
 
   <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud. Ethernet is also supported for a variety of boards and shields. Additional connectiion types (such as Wi-Fi) will be added in the future.</p>
 
@@ -25,7 +25,7 @@
 
   <hr>
 
-  <form method="post">
+  <form method="post" action="/">
 
     <h3>Configure connection</h3>
     <p>Select and configure the connection to your Firmata client. Serial, 57600 baud is the most common configuration. Ethernet is also supported.</p>
@@ -51,13 +51,13 @@
 
     <div class="form-group">
       <h3>Core features</h3>
-      <p>Core features are included in the ConfigurableFirmata repository and do not require any additional downloads.</p>
+      <p>Core features are included in the ConfigurableFirmata library and do not require any additional downloads.</p>
       <div class="row">
         <div class="col-xs-12">
           {{#each coreFeatures}}
             <div class="checkbox">
               <label>
-                <input type="checkbox" id="{{this.instanceName}}" name="feature-{{this.className}}"> {{this.className}}
+                <input type="checkbox" id="{{this.instanceName}}" name="feature-{{this.className}}"> {{this.className}} <a href="#" data-toggle="tooltip" data-placement="right" title data-original-title="{{this.description}}">(?)</a>
               </label>
             </div>
           {{/each}}
@@ -69,11 +69,11 @@
 
     <div class="form-group">
       <h3>Contributed features</h3>
-      <p>Contributed features and their dependencies must be downloaded and installed in your Arduino/libraries/ folder.</p>
+      <p>Contributed features and their dependencies must be downloaded and installed in your <code>Arduino/libraries/</code> folder.</p>
 
-      <div class="alert alert-warning" role="alert"><small>
+{{!--       <div class="alert alert-warning" role="alert"><small>
         Only select contributed features if you need them for your application. Some contributed features may not play well with one another or with certain core features (for example if 2 features use the same timer on the microcontroller).</small>
-      </div>
+      </div> --}}
 
       <div class="row">
         <div class="col-xs-12">
@@ -83,11 +83,14 @@
                 <input type="checkbox" id="{{this.instanceName}}" name="feature-{{this.className}}"> <a target="_blank" href="{{this.url}}">{{this.className}}</a>
               </label>
             </div>
-            <p class="contribDependencies">Dependencies:
+            <div class="contribFeatureBlock">
+            <p>{{this.description}}</p>
+            <p>Dependencies:
               {{#each this.dependencies}}
                 <a target="_blank" href="{{this.url}}">{{this.className}}</a>
               {{/each}}
             </p>
+            </div>
           {{/each}}
         </div>
       </div>
