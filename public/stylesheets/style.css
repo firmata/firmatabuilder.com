@@ -9,3 +9,7 @@ body {
 .contribFeatureBlock {
   margin-left: 20px;
 }
+
+.feature-alert {
+  display: none;
+}
