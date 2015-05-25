@@ -1,13 +1,11 @@
 <div class="fb-header">
   <div class="container">
     <h1>Firmata Builder</h1>
-    <h5>Firmata Builder generates a custom Firmata sketch file based on a selection of features.</h5>
+    <h4>Generate a custom Firmata sketch based on a selection of Firmata features.</h4>
   </div>
 </div>
 
 <div class="container">
-
-  <hr>
 
   <h3>How to use Firmata Builder</h3>
 
@@ -69,7 +67,7 @@
 
     <div class="form-group features">
       <h3>Contributed features</h3>
-      <p>Contributed features and their dependencies must be downloaded and installed in your <code>Arduino/libraries/</code> folder.</p>
+      <p>Contributed features and their dependencies and not included in the ConfigurableFirmata library and must be downloaded separately and installed in your <code>Arduino/libraries/</code> folder.</p>
 
 {{!--       <div class="alert alert-warning" role="alert"><small>
         Only select contributed features if you need them for your application. Some contributed features may not play well with one another or with certain core features (for example if 2 features use the same timer on the microcontroller).</small>
@@ -80,14 +78,14 @@
           {{#each contributedFeatures}}
             <div class="checkbox">
               <label>
-                <input type="checkbox" id="{{this.instanceName}}" name="feature-{{this.className}}"> <a target="_blank" href="{{this.url}}">{{this.className}}</a>
+                <input type="checkbox" id="{{this.instanceName}}" name="feature-{{this.className}}"> <a target="_blank" href="{{this.url}}">{{this.className}} <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
               </label>
             </div>
             <div class="contribFeatureBlock">
             <p>{{this.description}}</p>
             <p>Dependencies:
               {{#each this.dependencies}}
-                <a target="_blank" href="{{this.url}}">{{this.className}}</a>
+                <a target="_blank" href="{{this.url}}">{{this.className}} <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
               {{/each}}
             </p>
             </div>
@@ -99,6 +97,7 @@
     <hr>
 
     <div class="form-group">
+      <h3>Download</h3>
       <p>Name your custom Firmata and click to download. Once downloaded, unzip and copy the folder to your Arduino sketch folder or anywhere else on your system. Then compile and upload the file just like you would any other Arduino sketch.</p>
 
       <div class="alert alert-danger feature-alert" role="alert">

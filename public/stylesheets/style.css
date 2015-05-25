@@ -2,6 +2,20 @@ body {
   margin-bottom: 50px;
 }
 
+.fb-header {
+  background-color: #607D8B;
+  padding-bottom: 10px;
+}
+
+.fb-header h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.fb-header h4 {
+  color: #CFD8DC;
+}
+
 .container {
   width: 800px !important;
 }
