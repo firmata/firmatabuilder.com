@@ -2,6 +2,10 @@ body {
   margin-bottom: 50px;
 }
 
+.preview-alert {
+  margin-top: 20px;
+}
+
 .fb-header {
   background-color: #607D8B;
   padding-bottom: 10px;
@@ -20,7 +24,7 @@ body {
   width: 800px !important;
 }
 
-.contribFeatureBlock {
+.contrib-feature-block {
   margin-left: 20px;
 }
 

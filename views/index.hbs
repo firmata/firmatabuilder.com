@@ -7,6 +7,10 @@
 
 <div class="container">
 
+  <div class="alert alert-danger preview-alert" role="alert">
+    <strong>This is a preview for testing and feedback. Please do not share the link.</strong>
+  </div>
+
   <h3>How to use Firmata Builder</h3>
 
   <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your <code>Arduino/libraries/</code> folder. The latest version is {{this.version}}.</p>
@@ -67,7 +71,7 @@
 
     <div class="form-group features">
       <h3>Contributed features</h3>
-      <p>Contributed features and their dependencies and not included in the ConfigurableFirmata library and must be downloaded separately and installed in your <code>Arduino/libraries/</code> folder.</p>
+      <p>Contributed features and their dependencies are not included in the ConfigurableFirmata library and must be downloaded separately and installed in your <code>Arduino/libraries/</code> folder.</p>
 
 {{!--       <div class="alert alert-warning" role="alert"><small>
         Only select contributed features if you need them for your application. Some contributed features may not play well with one another or with certain core features (for example if 2 features use the same timer on the microcontroller).</small>
@@ -81,7 +85,7 @@
                 <input type="checkbox" id="{{this.instanceName}}" name="feature-{{this.className}}"> <a target="_blank" href="{{this.url}}">{{this.className}} <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
               </label>
             </div>
-            <div class="contribFeatureBlock">
+            <div class="contrib-feature-block">
             <p>{{this.description}}</p>
             <p>Dependencies:
               {{#each this.dependencies}}
