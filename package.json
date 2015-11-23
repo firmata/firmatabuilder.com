@@ -1,6 +1,6 @@
 {
   "name": "firmatabuilder.com",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Firmata Builder web application",
   "main": "app.js",
   "private": true,
