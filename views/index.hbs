@@ -9,17 +9,13 @@
 
   <h3>How to use Firmata Builder</h3>
 
-  <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your sketchbook libraries folder (typically <code>/Documents/Arduino/libraries/</code> for Mac or Linux or <code>\My Documents\Arduino\libraries\</code> for Windows). The latest version is {{this.version}}.</p>
+  <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your sketchbook libraries folder (typically <code>/Documents/Arduino/libraries/</code> for Mac or Linux or <code>\My Documents\Arduino\libraries\</code> for Windows). The latest version is {{this.version.tag}}.</p>
 
-  <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud. Ethernet and Wi-Fi will be added in the future.</p>
+  <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud, but Ethernet is also available for certain ethernet shields and boards. Wi-Fi will be added in the future.</p>
 
   <p>Once you have the connection type configured, select the core features and any contributed features your application requires.</p>
 
   <p>Finally, name your file and click the Build and Download button and your custom Firmata will be downloaded.</p>
-
-  <div class="alert alert-warning" role="alert"><small>
-    Only select the features you need for your application. Selecting all features on this form may result in poor performance or consume more memory than your board provides.</small>
-  </div>
 
   <hr>
 
@@ -33,17 +29,105 @@
         <label for="connectionType">Connection type</label>
         <select  id="connectionType" name="connectionType" class="form-control">
           <option value="serial">Serial</option>
+          <option value="ethernet">Ethernet</option>
         </select>
       </div>
-      <div id="connectionConfig">
-        <div class="col-xs-2">
-          <div class="form-group">
-            <label for="baud">Baud</label>
-            <input type="text" class="form-control" id="baud" name="baud" value="57600">
+
+      <div class="col-xs-9">
+
+        <div id="serialConfig">
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="baud">Baud</label>
+                <input type="text" class="form-control" id="baud" name="baud" value="57600">
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+
+        <div id="ethernetConfig">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label for="controller">Controller or shield/board</label>
+                <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="left" title data-original-title="Currently only ethernet shields or boards using the Wiznet 5100 or the ENC28J60 ethernet controllers are supported. You can also use the on-board Ethernet port on an Arduino Yun"> (?)</a>
+                <select id="controller" name="controller" class="form-control">
+                  {{#each controllers}}
+                  <option value="{{this}}">{{@key}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+
+            <!-- ignore if Arduino Yun is selected -->
+            <div id="macAddress" class="col-xs-5">
+              <div class="form-group">
+                <label class="control-label" for="mac">MAC address</label>
+                <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="left" title data-original-title="Sometimes printed on the Ethernet shield or board. If not, use the provided MAC address or make a new one. The address must be unique on the network."> (?)</a>
+                <input type="text" class="form-control" id="mac" name="mac" value="DE:AA:BB:CC:DD:01" placeholder="e.g. DE:AA:BB:CC:DD:01">
+              </div>
+            </div>
+
+          </div> <!-- end row 1 -->
+          <div class="row">
+
+            <div class="col-xs-4">
+              <div class="form-group ipAddress">
+                <label class="control-label" for="remoteIp">Remote IP</label>
+                <input type="text" class="form-control" id="remoteIp" name="remoteIp" placeholder="e.g. 192.168.0.1">
+                <p class="help-block">Either Remote IP or Remote host is required</p>
+              </div>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="remoteHost">Remote host</label>
+                <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="left" title data-original-title="You must specify either a Remote IP or a Remote host but not both"> (?)</a>
+                <input type="text" class="form-control" id="remoteHost" name="remoteHost" placeholder="e.g. server.local">
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="form-group port">
+                <label for="remotePort">Remote port</label>
+                <input type="text" class="form-control" id="remotePort" name="remotePort" value="3030">
+              </div>
+            </div>
+
+          </div> <!-- end row 2 -->
+          <div class="row">
+
+            <!-- ignore if Arduino Yun is selected -->
+            <div id="localIpAddress" class="col-xs-4">
+              <div class="form-group ipAddress">
+                <label class="control-label" for="localIp">Local IP (optional)</label>
+                <input type="text" class="form-control" id="localIp" name="localIp">
+                <p class="help-block">Leave blank to use DHCP</p>
+              </div>
+            </div>
+
+          </div> <!-- end row 3 -->
+
+          <div class="row">
+            <div id="configError" class="col-xs-12">
+              <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span class="errorText"></span>
+              </div>
+            </div>
+
+            <div id="uipEthernet" class="col-xs-12">
+              <p>The UIPEternet library must be installed to use ENC28J60-based boards and shields.
+              <a target="_blank" href="https://github.com/ntruchsess/arduino_uip"> UIPEthernet Library <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
+            </div>
+          </div>
+
+        </div> <!-- end ethernetConfig -->
+
+      </div> <!-- end 9 column span -->
+    </div> <!-- end 12 column row -->
 
     <hr>
 
@@ -69,10 +153,6 @@
       <h3>Contributed features</h3>
       <p>Contributed features and their dependencies are not included in the ConfigurableFirmata library and must be downloaded separately and installed in your sketchbook libraries folder.</p>
 
-{{!--       <div class="alert alert-warning" role="alert"><small>
-        Only select contributed features if you need them for your application. Some contributed features may not play well with one another or with certain core features (for example if 2 features use the same timer on the microcontroller).</small>
-      </div> --}}
-
       <div class="row">
         <div class="col-xs-12">
           {{#each contributedFeatures}}
@@ -94,16 +174,20 @@
       </div>
     </div>
 
+    <div class="alert alert-warning" role="alert"><small>
+      Tip: Only select the features you regularly use. Selecting all features on this form may result in poor performance or consume more memory than your board provides. Faster boards with more memory such as Arduino Zero, Arduino Due, Teensy 3.1/3.2, etc are recommended if you need to use several features simultaneously.</small>
+    </div>
+
     <hr>
 
     <div class="form-group">
       <h3>Download</h3>
-      <p>Name your custom Firmata and click to download. Once downloaded, unzip and copy the folder to your Arduino sketch folder or anywhere else on your system. Then compile and upload the file just like you would any other Arduino sketch.</p>
+      <p>Name your custom Firmata and click to download. Once downloaded, unzip and open the enclosed .ino file in the Arduino IDE. Then compile and upload the file just like you would any other Arduino sketch.</p>
 
-      <div class="alert alert-danger feature-alert" role="alert">
+      <div id="submitError" class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
-        You must select at least one feature.
+        <span class="errorText"></span>
       </div>
 
       <div class="row">

@@ -1,8 +1,8 @@
 /*
-  firmatabuilder v0.1.0 - 2015-11-22
+  firmatabuilder v0.1.0 - 2015-11-28
   Copyright (c) 2015 Jeff Hoefs. All rights reserved.
 
-  See file LICENSE.-MIT for further informations on licensing terms.
+  See file LICENSE-MIT for further informations on licensing terms.
 */
 
 var express = require('express');
