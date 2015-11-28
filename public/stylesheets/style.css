@@ -2,10 +2,6 @@ body {
   margin-bottom: 50px;
 }
 
-.preview-alert {
-  margin-top: 20px;
-}
-
 .fb-header {
   background-color: #607D8B;
   padding-bottom: 10px;
@@ -28,6 +24,18 @@ body {
   margin-left: 20px;
 }
 
-.feature-alert {
+#submitError {
+  display: none;
+}
+
+#ethernetConfig {
+  display: none;
+}
+
+#uipEthernet {
+  display: none;
+}
+
+#configError {
   display: none;
 }
