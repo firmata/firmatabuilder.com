@@ -11,9 +11,10 @@ var fs = require('fs');
 var path = require('path');
 var AdmZip = require('adm-zip');
 
-var builder = require('../lib/builder.js');
-var coreFeatures = require('../lib/coreFeatures.js');
-var contributedFeatures = require('../lib/contributedFeatures');
+var firmataBuilder = require('firmata-builder');
+var builder = firmataBuilder.builder;
+var coreFeatures = firmataBuilder.coreFeatures;
+var contributedFeatures = firmataBuilder.contributedFeatures;
 
 var parseFeatures = function (data) {
   var features = [];
@@ -58,7 +59,7 @@ router.get('/', function (req, res, next) {
     coreFeatures: coreFeatures,
     contributedFeatures: contributedFeatures,
     controllers: builder.controllers,
-    version: {tag: "2.7.0", url: ""}
+    version: {tag: "2.8.0", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.8.0"}
   });
 });
 

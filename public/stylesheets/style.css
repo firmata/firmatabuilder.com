@@ -16,6 +16,10 @@ body {
   color: #CFD8DC;
 }
 
+.fb-issues {
+  margin-top: 30px;
+}
+
 .container {
   width: 800px !important;
 }

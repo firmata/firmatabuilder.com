@@ -9,7 +9,7 @@
 
   <h3>How to use Firmata Builder</h3>
 
-  <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your sketchbook libraries folder (typically <code>/Documents/Arduino/libraries/</code> for Mac or Linux or <code>\My Documents\Arduino\libraries\</code> for Windows). The latest version is {{this.version.tag}}.</p>
+  <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your sketchbook libraries folder (typically <code>/Documents/Arduino/libraries/</code> for Mac or Linux or <code>\My Documents\Arduino\libraries\</code> for Windows). The latest version is <a href="{{this.version.url}}">{{this.version.tag}}</a>.</p>
 
   <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud, but Ethernet is also available for certain ethernet shields and boards. Wi-Fi will be added in the future.</p>
 
@@ -200,5 +200,9 @@
     </div>
 
   </form>
+
+  <div class="alert alert-warning fb-issues" role="alert"><small>
+    If you encounter any issues such as a generated sketch not compiling, please report it <a href="https://github.com/firmata/firmata-builder/issues">here</a> and paste in the text from the generated .ino file and list the selections you made on this form.</small>
+  </div>
 
 </div>
