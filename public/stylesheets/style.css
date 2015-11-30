@@ -16,12 +16,8 @@ body {
   color: #CFD8DC;
 }
 
-.fb-issues {
-  margin-top: 30px;
-}
-
 .container {
-  width: 800px !important;
+  max-width: 800px !important;
 }
 
 .contrib-feature-block {
@@ -42,4 +38,11 @@ body {
 
 #configError {
   display: none;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    margin-left: -15px;
+  }
+
 }
