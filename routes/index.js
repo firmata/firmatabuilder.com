@@ -9,7 +9,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
-var AdmZip = require('adm-zip');
+var archiver = require('archiver');
 
 var firmataBuilder = require('firmata-builder');
 var builder = firmataBuilder.builder;
@@ -65,7 +65,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
 
-  var zip = new AdmZip();
+  var archive = archiver('zip');
   var filename = req.body.filename || "ConfiguredFirmata";
   var defaultConnection = {serial: {baud: 57600}};
   var input = {};
@@ -82,9 +82,14 @@ router.post('/', function (req, res, next) {
 
   var outputText = builder.build(input);
 
-  zip.addFile(filename + '/' + filename + '.ino', new Buffer(outputText));
+  // set the archive name
   res.attachment(filename + '.zip');
-  res.send(zip.toBuffer());
+
+  archive.pipe(res);
+
+  var fileName = path.join(filename, filename + '.ino')
+  archive.append(new Buffer(outputText), {name: fileName})
+  archive.finalize();
 
 });
 
