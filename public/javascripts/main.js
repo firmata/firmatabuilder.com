@@ -109,7 +109,7 @@ $(function () {
   });
 
   $ethernetController.on('change', function (e) {
-    if (e.target.value === "Arduino Yun") {
+    if (e.target.value === "YUN") {
       $macAddress.hide();
       $localIp.hide();
     } else {

@@ -55,8 +55,8 @@
                 <label for="controller">Controller or shield/board</label>
                 <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Currently only ethernet shields or boards using the Wiznet 5100 or the ENC28J60 ethernet controllers are supported. You can also use the on-board Ethernet port on an Arduino Yun"> (?)</a>
                 <select id="controller" name="controller" class="form-control">
-                  {{#each controllers}}
-                  <option value="{{this}}">{{@key}}</option>
+                  {{#each controllers.ethernet}}
+                  <option value="{{@key}}">{{this.name}}</option>
                   {{/each}}
                 </select>
               </div>
