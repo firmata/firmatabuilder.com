@@ -1,0 +1,124 @@
+<div id="wifiConfig">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="wifiController">Wi-Fi board or shield</label>
+        <select name="wifiController" class="controller form-control">
+          {{#each controllers.wifi}}
+          <option value="{{@key}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+      <div class="form-group">
+        <label for="securityType">Security Type</label>
+        <select  id="securityType" name="securityType" class="form-control">
+          <option value="wpa">WPA</option>
+          <option value="wep">WEP</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+    </div>
+  </div> <!-- end row 1 -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="ssid">SSID</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="The name of your Wi-Fi network. Optionally leave blank and update in the downloaded sketch file (search for the text: 'your_network_name)'."> (?)</a>
+        <input type="text" class="form-control" id="ssid" name="ssid" placeholder="your_network_name">
+      </div>
+    </div>
+
+    <!-- if securityType == WPA -->
+    <div id="wpaPassphrase" class="col-sm-4">
+      <div class="form-group">
+        <label for="wpaPassphrase">WPA passphrase</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="For security reasons, please manually enter your WPA passphrase in the downloaded sketch file (search for the text: 'your_wpa_passphrase')."> (?)</a>
+        <input type="text" class="form-control" name="wpaPassphrase" placeholder="your_wpa_passphrase" disabled>
+      </div>
+    </div>
+
+    <!-- if securityType == WEP -->
+    <div id="wepKey" class="col-sm-4">
+      <div class="form-group">
+        <label for="wepKey">WEP key</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="For security reasons, please manually enter your WEP key in the downloaded sketch file (search for the text: 'your_wep_key')."> (?)</a>
+        <input type="text" class="form-control" name="wepKey" placeholder="your_wep_key" disabled>
+      </div>
+    </div>
+
+    <div id="wepIndex" class="col-sm-3">
+      <div class="form-group">
+        <label for="wepIndex">WEP index</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Use a zero-indexed value. Valid indicies are [0-3], even if your router/gateway numbers your keys [1-4]."> (?)</a>
+        <input type="text" class="form-control" name="wepIndex" placeholder="0">
+      </div>
+    </div>
+  </div> <!-- end row 2 -->
+
+  <div class="row">
+    <div id="wifiConnectionType" class="col-sm-4">
+      <div class="radio">
+        <label>
+          <input type="radio" name="wifiConnectionType" value="tcpServer" checked>
+          TCP Server
+          <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Configures the Wi-Fi board/shield as a TCP server."> (?)</a>
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="wifiConnectionType" value="tcpClient">
+          TCP Client
+          <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Configures the Wi-Fi board/shield as a TCP client."> (?)</a>
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="form-group port">
+        <label for="wifiPortNumber">Port number</label>
+        <input type="text" class="form-control" name="wifiPortNumber" value="3030">
+      </div>
+    </div>
+
+    <div id="wifiServerIp" class="col-sm-4">
+      <div class="form-group ipAddress">
+        <label class="control-label" for="wifiServerIp">Remote Server IP</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="IP address of the remote server when the Wi-Fi board/shield is configured as a TCP client."> (?)</a>
+        <input type="text" class="form-control" name="wifiServerIp" placeholder="e.g. 192.168.0.1">
+      </div>
+    </div>
+  </div> <!-- end row 3 -->
+
+  <div class="row">
+    <div id="wifiLocalIpAddress" class="col-sm-4">
+      <div class="form-group ipAddress">
+        <label class="control-label" for="wifiLocalIp">Local IP (optional)</label>
+        <input type="text" class="form-control" name="wifiLocalIp">
+        <p class="help-block">Leave blank to use DHCP</p>
+      </div>
+    </div>
+
+    <div id="subnetMask" class="col-sm-4">
+      <div class="form-group ipAddress">
+        <label class="control-label" for="subnetMask">Subnet mask</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Required for ESP8266 when Local IP is set, optional for all other boards and shields. Default value = 255.255.255.0."> (?)</a>
+        <input type="text" class="form-control" name="subnetMask" placeholder="255.255.255.0">
+        <p class="help-block">Required for ESP8266</p>
+      </div>
+    </div>
+
+    <div id="gatewayIp" class="col-sm-4">
+      <div class="form-group ipAddress">
+        <label class="control-label" for="gatewayIp">Gateway IP</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Required for ESP8266 when Local IP is set, optional for all other boards and shields. Default value = 0.0.0.0."> (?)</a>
+        <input type="text" class="form-control" name="gatewayIp" placeholder="0.0.0.0">
+        <p class="help-block">Required for ESP8266</p>
+      </div>
+    </div>
+  </div> <!-- end row 4 -->
+
+</div> <!-- end wifiConfig -->

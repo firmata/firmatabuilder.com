@@ -1,0 +1,70 @@
+<div id="ethernetConfig">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="ethernetController">Controller or shield/board</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Currently only ethernet shields or boards using the Wiznet 5100 or the ENC28J60 ethernet controllers are supported. You can also use the on-board Ethernet port on an Arduino Yun"> (?)</a>
+        <select name="ethernetController" class="controller form-control">
+          {{#each controllers.ethernet}}
+          <option value="{{@key}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+    <!-- ignore if Arduino Yun is selected -->
+    <div id="macAddress" class="col-sm-5">
+      <div class="form-group">
+        <label class="control-label" for="mac">MAC address</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Sometimes printed on the Ethernet shield or board. If not, use the provided MAC address or make a new one. The address must be unique on the network."> (?)</a>
+        <input type="text" class="form-control" name="mac" value="DE:AA:BB:CC:DD:01" placeholder="e.g. DE:AA:BB:CC:DD:01">
+      </div>
+    </div>
+  </div> <!-- end row 1 -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group ipAddress">
+        <label class="control-label" for="ethernetRemoteIp">Remote IP</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="The IP address of the remote server to connect to. Currently the Ethernet board/shield can only be configured as a TCP client."> (?)</a>
+        <input type="text" class="form-control" id="remoteIp" name="ethernetRemoteIp" placeholder="e.g. 192.168.0.1">
+        <p class="help-block">Either Remote IP or Remote host is required</p>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="ethernetRemoteHost">Remote host</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="You must specify either a Remote IP or a Remote host but not both"> (?)</a>
+        <input type="text" class="form-control" if="remoteHost" name="ethernetRemoteHost" placeholder="e.g. server.local">
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="form-group port">
+        <label for="ethernetRemotePort">Remote port</label>
+        <input type="text" class="form-control"name="ethernetRemotePort" value="3030">
+      </div>
+    </div>
+
+  </div> <!-- end row 2 -->
+
+  <div class="row">
+    <!-- ignore if Arduino Yun is selected -->
+    <div id="localIpAddress" class="col-sm-4">
+      <div class="form-group ipAddress">
+        <label class="control-label" for="ethernetLocalIp">Local IP (optional)</label>
+        <input type="text" class="form-control" name="ethernetLocalIp">
+        <p class="help-block">Leave blank to use DHCP</p>
+      </div>
+    </div>
+  </div> <!-- end row 3 -->
+
+  <div class="row">
+    <div id="uipEthernet" class="col-sm-12">
+      <p>The UIPEternet library must be installed to use ENC28J60-based boards and shields.
+      <a target="_blank" href="https://github.com/ntruchsess/arduino_uip"> UIPEthernet Library <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
+    </div>
+  </div> <!-- end row 4 -->
+
+</div> <!-- end ethernetConfig -->
