@@ -1,5 +1,5 @@
 /*
-  firmatabuilder v0.1.1 - 2016-1-24
+  firmatabuilder v0.2.0 - 2016-8-14
   Copyright (c) 2015-2016 Jeff Hoefs. All rights reserved.
 
   See file LICENSE-MIT for further informations on licensing terms.
