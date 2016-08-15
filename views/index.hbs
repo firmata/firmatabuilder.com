@@ -11,7 +11,7 @@
 
   <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your sketchbook libraries folder (typically <code>/Documents/Arduino/libraries/</code> for Mac or Linux or <code>\My Documents\Arduino\libraries\</code> for Windows). The latest version is <a href="{{this.version.url}}">{{this.version.tag}}</a>.</p>
 
-  <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud, but Ethernet is also available for certain ethernet shields and boards. Wi-Fi will be added in the future.</p>
+  <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud, but Wi-Fi and Ethernet are also available for certain boards and shields. BLE will be added in the future.</p>
 
   <p>Once you have the connection type configured, select the core features and any contributed features your application requires.</p>
 
@@ -30,6 +30,7 @@
           <label for="connectionType">Connection type</label>
           <select  id="connectionType" name="connectionType" class="form-control">
             <option value="serial">Serial</option>
+            <option value="wifi">Wi-Fi</option>
             <option value="ethernet">Ethernet</option>
           </select>
         </div>
@@ -37,96 +38,21 @@
 
       <div class="col-sm-9">
 
-        <div id="serialConfig">
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="baud">Baud</label>
-                <input type="text" class="form-control" id="baud" name="baud" value="57600">
-              </div>
+        {{> serial}}
+
+        {{> ethernet}}
+
+        {{> wifi}}
+
+        <div class="row">
+          <div id="configError" class="col-sm-12">
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              <span class="errorText"></span>
             </div>
           </div>
         </div>
-
-        <div id="ethernetConfig">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="controller">Controller or shield/board</label>
-                <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Currently only ethernet shields or boards using the Wiznet 5100 or the ENC28J60 ethernet controllers are supported. You can also use the on-board Ethernet port on an Arduino Yun"> (?)</a>
-                <select id="controller" name="controller" class="form-control">
-                  {{#each controllers}}
-                  <option value="{{this}}">{{@key}}</option>
-                  {{/each}}
-                </select>
-              </div>
-            </div>
-
-            <!-- ignore if Arduino Yun is selected -->
-            <div id="macAddress" class="col-sm-5">
-              <div class="form-group">
-                <label class="control-label" for="mac">MAC address</label>
-                <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="Sometimes printed on the Ethernet shield or board. If not, use the provided MAC address or make a new one. The address must be unique on the network."> (?)</a>
-                <input type="text" class="form-control" id="mac" name="mac" value="DE:AA:BB:CC:DD:01" placeholder="e.g. DE:AA:BB:CC:DD:01">
-              </div>
-            </div>
-
-          </div> <!-- end row 1 -->
-          <div class="row">
-
-            <div class="col-sm-4">
-              <div class="form-group ipAddress">
-                <label class="control-label" for="remoteIp">Remote IP</label>
-                <input type="text" class="form-control" id="remoteIp" name="remoteIp" placeholder="e.g. 192.168.0.1">
-                <p class="help-block">Either Remote IP or Remote host is required</p>
-              </div>
-            </div>
-
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="remoteHost">Remote host</label>
-                <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="You must specify either a Remote IP or a Remote host but not both"> (?)</a>
-                <input type="text" class="form-control" id="remoteHost" name="remoteHost" placeholder="e.g. server.local">
-              </div>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="form-group port">
-                <label for="remotePort">Remote port</label>
-                <input type="text" class="form-control" id="remotePort" name="remotePort" value="3030">
-              </div>
-            </div>
-
-          </div> <!-- end row 2 -->
-          <div class="row">
-
-            <!-- ignore if Arduino Yun is selected -->
-            <div id="localIpAddress" class="col-sm-4">
-              <div class="form-group ipAddress">
-                <label class="control-label" for="localIp">Local IP (optional)</label>
-                <input type="text" class="form-control" id="localIp" name="localIp">
-                <p class="help-block">Leave blank to use DHCP</p>
-              </div>
-            </div>
-
-          </div> <!-- end row 3 -->
-
-          <div class="row">
-            <div id="configError" class="col-sm-12">
-              <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
-                <span class="errorText"></span>
-              </div>
-            </div>
-
-            <div id="uipEthernet" class="col-sm-12">
-              <p>The UIPEternet library must be installed to use ENC28J60-based boards and shields.
-              <a target="_blank" href="https://github.com/ntruchsess/arduino_uip"> UIPEthernet Library <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
-            </div>
-          </div>
-
-        </div> <!-- end ethernetConfig -->
 
       </div> <!-- end 9 column span -->
     </div> <!-- end 12 column row -->

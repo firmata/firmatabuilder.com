@@ -26,6 +26,23 @@ var parseFeatures = function (data) {
   return features;
 };
 
+var getWiFiSecurityType = function(connectionParams) {
+  var securityType = {};
+  var securityParams = {};
+  if (connectionParams.securityType && connectionParams.securityType === "wpa") {
+    securityParams.passphrase =
+      connectionParams.wpaPassphrase ? connectionParams.wpaPassphrase : "your_wpa_passphrase";
+    securityType.wpa = securityParams;
+  } else if (connectionParams.securityType && connectionParams.securityType === "wep") {
+    securityParams.key = connectionParams.wepKey ? connectionParams.wepKey : "your_wep_key";
+    securityParams.index = connectionParams.wepIndex ? connectionParams.wepIndex : 0;
+    securityType.wep = securityParams;
+  } else {
+    securityType.none = "NONE";
+  }
+  return securityType;
+}
+
 var parseConnection = function (data) {
   var connection = {};
 
@@ -43,12 +60,25 @@ var parseConnection = function (data) {
   } else if (connection.connectionType === "ethernet") {
     return {
       ethernet: {
-        controller: connection.controller,
-        remoteIp: connection.remoteIp,
-        remoteHost: connection.remoteHost,
-        localIp: connection.localIp,
-        remotePort: connection.remotePort,
+        controller: connection.ethernetController,
+        remoteIp: connection.ethernetRemoteIp,
+        remoteHost: connection.ethernetRemoteHost,
+        localIp: connection.ethernetLocalIp,
+        remotePort: connection.ethernetRemotePort,
         mac: connection.mac
+      }
+    }
+  } else if (connection.connectionType === "wifi") {
+    return {
+      wifi: {
+        controller: connection.wifiController,
+        remoteServerIp: connection.wifiRemoteServerIp,
+        networkPort: connection.wifiPortNumber,
+        localIp: connection.wifiLocalIp,
+        subnetMask: connection.subnetMask,
+        gatewayIp: connection.gatewayIp,
+        ssid: connection.ssid,
+        securityType: getWiFiSecurityType(connection)
       }
     }
   }
@@ -59,7 +89,7 @@ router.get('/', function (req, res, next) {
     coreFeatures: coreFeatures,
     contributedFeatures: contributedFeatures,
     controllers: builder.controllers,
-    version: {tag: "2.8.0", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.8.0"}
+    version: {tag: "2.9.0", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.9.0"}
   });
 });
 

@@ -32,12 +32,40 @@ body {
   display: none;
 }
 
+#wifiConfig {
+  display: none;
+}
+
 #uipEthernet {
   display: none;
 }
 
+#subnetMask {
+  display: none;
+}
+
+#gatewayIp {
+  display:none;
+}
+
 #configError {
   display: none;
+}
+
+#wepKey {
+  display: none;
+}
+
+#wepIndex {
+  display: none;
+}
+
+#wifiRemoteServerIp {
+  display: none;
+}
+
+#wifiConnectionType {
+  margin-top: 6px;
 }
 
 @media (min-width: 768px) {

@@ -2,22 +2,35 @@ $(function () {
 
   var $tooltip = $('[data-toggle="tooltip"]');
   var $form = $('form');
+
   var $submitBtn = $('#submit');
-  var $features = $('.features');
-  var $featureCheckboxes = $features.find("input:checkbox");
   var $connectionType = $('#connectionType');
   var $serialConfig = $('#serialConfig');
   var $ethernetConfig = $('#ethernetConfig');
-  var $ethernetController = $('#controller');
+  var $wifiConfig = $('#wifiConfig');
   var $macAddress = $('#macAddress');
-  var $port = $('.port');
   var $localIp = $('#localIpAddress');
+  var $wifiLocalIp = $('#wifiLocalIpAddress');
+  var $subnetMask = $('#subnetMask');
+  var $gatewayIp = $('#gatewayIp');
   var $remoteHost = $('#remoteHost');
   var $remoteIp = $('#remoteIp');
-  var $ipAddress = $('.ipAddress');
   var $uipEthernet = $('#uipEthernet');
   var $configError = $('#configError');
   var $submitError = $('#submitError');
+  var $securityType = $('#securityType');
+  var $wpaPassphrase = $('#wpaPassphrase');
+  var $wepKey = $('#wepKey');
+  var $wepIndex = $('#wepIndex');
+  var $wifiConnectionType = $('#wifiConnectionType');
+  var $wifiRemoteServerIp = $('#wifiRemoteServerIp');
+
+  var $features = $('.features');
+  var $controller = $('.controller');
+  var $ipAddress = $('.ipAddress');
+  var $port = $('.port');
+
+  var $featureCheckboxes = $features.find("input:checkbox");
 
   var configErrors = {};
   var submitErrors = {};
@@ -27,7 +40,6 @@ $(function () {
   var errorTypes = {
     CONFIG: "config",
     REMOTE: "remote",
-    IP: "ip",
     MAC: "mac",
     NO_REMOTE: "noRemote",
     PORT: "port",
@@ -93,23 +105,30 @@ $(function () {
 
   $connectionType.on('change', function (e) {
     var val = e.target.value;
+    removeAllErrors($configError, configErrors);
+    removeAllErrors($submitError, submitErrors);
     switch (val) {
     case "serial":
       $ethernetConfig.hide();
+      $wifiConfig.hide();
       $serialConfig.show();
-      removeAllErrors($configError, configErrors);
-      removeAllErrors($submitError, submitErrors);
       break;
     case "ethernet":
       $serialConfig.hide();
+      $wifiConfig.hide();
       $ethernetConfig.show();
+      break;
+    case "wifi":
+      $serialConfig.hide();
+      $ethernetConfig.hide();
+      $wifiConfig.show();
       break;
     }
     connectionType = val;
   });
 
-  $ethernetController.on('change', function (e) {
-    if (e.target.value === "Arduino Yun") {
+  $controller.on('change', function (e) {
+    if (e.target.value === "YUN") {
       $macAddress.hide();
       $localIp.hide();
     } else {
@@ -124,12 +143,33 @@ $(function () {
     }
   });
 
+  $securityType.on('change', function (e) {
+    if (e.target.value === "wpa") {
+      $wepKey.hide();
+      $wepIndex.hide();
+      $wpaPassphrase.show();
+    } else if (e.target.value === "wep") {
+      $wpaPassphrase.hide();
+      $wepKey.show();
+      $wepIndex.show();
+    } else {
+      $wepKey.hide();
+      $wepIndex.hide();
+      $wpaPassphrase.hide();
+    }
+  });
+
   function displayValidationState($context, isValid) {
     if (isValid) {
       $context.removeClass('has-error');
     } else {
       $context.addClass('has-error');
     }
+  }
+
+  function getIpType($el) {
+    var name = $el.attr('name');
+    return name;
   }
 
   function getErrorCount(errorCollection) {
@@ -199,16 +239,34 @@ $(function () {
     }
   }
 
-  $ipAddress.on('change', function (e) {
-    var isValid = validateIp(e.target.value) || e.target.value === "";
-    displayValidationState($(this), isValid);
-    if (!isValid) {
-      displayConfigError(errorTypes.IP, "A valid IP address is required (e.g. 192.168.0.1)");
+  $wifiLocalIp.on('change', function (e) {
+    var address = e.target.value;
+    var isValid = validateIp(address);
+    if (isValid) {
+      $subnetMask.show();
+      $gatewayIp.show();
     } else {
-      removeConfigError(errorTypes.IP);
+      $subnetMask.hide();
+      $gatewayIp.hide();
+      $subnetMask.find('input').val("");
+      $gatewayIp.find('input').val("");
+      removeConfigError("subnetMask");
+      removeConfigError("gatewayIp");
     }
   });
 
+  $ipAddress.on('change', function (e) {
+    var isValid = validateIp(e.target.value) || e.target.value === "";
+    var iPType = getIpType($(e.target));
+    displayValidationState($(this), isValid);
+    if (!isValid) {
+      displayConfigError(iPType, "A valid IP address is required (e.g. 192.168.0.1)");
+    } else {
+      removeConfigError(iPType);
+    }
+  });
+
+  // ethernet
   $macAddress.on('change', function (e) {
     var isValid = validateMac(e.target.value);
     displayValidationState($(this), isValid);
@@ -223,7 +281,7 @@ $(function () {
     var isValid = validatePort(e.target.value);
     displayValidationState($(this), isValid);
     if (!isValid) {
-      displayConfigError(errorTypes.PORT, "A valid Remote Port is required (0 - 65536)");
+      displayConfigError(errorTypes.PORT, "A valid Port is required (0 - 65536)");
     } else {
       removeConfigError(errorTypes.PORT);
     }
@@ -235,6 +293,17 @@ $(function () {
 
   $remoteIp.on('change', function (e) {
     enforceRemoteHostvsIp();
+  });
+
+  $wifiConnectionType.on('change', function (e) {
+    var type = e.target.value;
+    if (type === "tcpClient") {
+      $wifiRemoteServerIp.show();
+    } else {
+      $wifiRemoteServerIp.hide();
+      $wifiRemoteServerIp.find('input').val("");
+      removeConfigError("wifiRemoteServerIp");
+    }
   });
 
   $featureCheckboxes.on('click', function (e) {
@@ -251,7 +320,7 @@ $(function () {
       return;
     }
 
-    if (connectionType === "ethernet" && getErrorCount(configErrors) > 0) {
+    if ((connectionType === "ethernet" || connectionType === "wifi") && getErrorCount(configErrors) > 0) {
       e.preventDefault();
       displaySubmitError(errorTypes.CONFIG, "Correct configuration errors above");
       return;
