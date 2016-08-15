@@ -23,7 +23,7 @@ $(function () {
   var $wepKey = $('#wepKey');
   var $wepIndex = $('#wepIndex');
   var $wifiConnectionType = $('#wifiConnectionType');
-  var $wifiServerIp = $('#wifiServerIp');
+  var $wifiRemoteServerIp = $('#wifiRemoteServerIp');
 
   var $features = $('.features');
   var $controller = $('.controller');
@@ -298,11 +298,11 @@ $(function () {
   $wifiConnectionType.on('change', function (e) {
     var type = e.target.value;
     if (type === "tcpClient") {
-      $wifiServerIp.show();
+      $wifiRemoteServerIp.show();
     } else {
-      $wifiServerIp.hide();
-      $wifiServerIp.find('input').val("");
-      removeConfigError("wifiServerIp");
+      $wifiRemoteServerIp.hide();
+      $wifiRemoteServerIp.find('input').val("");
+      removeConfigError("wifiRemoteServerIp");
     }
   });
 

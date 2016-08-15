@@ -72,8 +72,8 @@ var parseConnection = function (data) {
     return {
       wifi: {
         controller: connection.wifiController,
-        serverIp: connection.wifiServerIp,
-        remotePort: connection.wifiPortNumber,
+        remoteServerIp: connection.wifiRemoteServerIp,
+        networkPort: connection.wifiPortNumber,
         localIp: connection.wifiLocalIp,
         subnetMask: connection.subnetMask,
         gatewayIp: connection.gatewayIp,
@@ -89,7 +89,7 @@ router.get('/', function (req, res, next) {
     coreFeatures: coreFeatures,
     contributedFeatures: contributedFeatures,
     controllers: builder.controllers,
-    version: {tag: "2.8.0", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.8.0"}
+    version: {tag: "2.9.0", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.9.0"}
   });
 });
 
