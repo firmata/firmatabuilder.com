@@ -88,7 +88,7 @@ router.get('/', function (req, res, next) {
     coreFeatures: coreFeatures,
     contributedFeatures: contributedFeatures,
     controllers: builder.controllers,
-    version: {tag: "2.9.1", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.9.1"}
+    version: {tag: "2.9.2", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.9.2"}
   });
 });
 
