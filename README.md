@@ -23,9 +23,9 @@ nodemon app.js
 
 ## Deploy
 
-TODO - figure out an automated deploy flow.
+TODO - figure out a contributor-friendly automated deploy flow.
 
-Until then, login to server and:
+Until then, only the project admin (@soundanalogous) can deploy.
 
 ```
 cd /var/www/firmatabuilder.com
