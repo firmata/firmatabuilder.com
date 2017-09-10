@@ -11,7 +11,7 @@
 
   <p>Make sure you first have the latest version of <a target="_blank" href="https://github.com/firmata/ConfigurableFirmata">ConfigurableFirmata</a> installed in your sketchbook libraries folder (typically <code>/Documents/Arduino/libraries/</code> for Mac or Linux or <code>\My Documents\Arduino\libraries\</code> for Windows). The latest version is <a href="{{this.version.url}}">{{this.version.tag}}</a>.</p>
 
-  <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud, but Wi-Fi and Ethernet are also available for certain boards and shields. BLE will be added in the future.</p>
+  <p>Next, select how you will connect to your client application. Typically this is a Serial connection at 57600 baud, but Wi-Fi, Ethernet and BLE are also available for certain boards and shields.</p>
 
   <p>Once you have the connection type configured, select the core features and any contributed features your application requires.</p>
 
@@ -32,6 +32,7 @@
             <option value="serial">Serial</option>
             <option value="wifi">Wi-Fi</option>
             <option value="ethernet">Ethernet</option>
+            <option value="ble">BLE</option>
           </select>
         </div>
       </div>
@@ -43,6 +44,8 @@
         {{> ethernet}}
 
         {{> wifi}}
+
+        {{> ble}}
 
         <div class="row">
           <div id="configError" class="col-sm-12">

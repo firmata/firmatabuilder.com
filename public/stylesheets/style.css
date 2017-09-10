@@ -36,6 +36,10 @@ body {
   display: none;
 }
 
+#bleConfig {
+  display: none;
+}
+
 #uipEthernet {
   display: none;
 }
@@ -45,7 +49,7 @@ body {
 }
 
 #gatewayIp {
-  display:none;
+  display: none;
 }
 
 #configError {
@@ -72,5 +76,4 @@ body {
   .btn {
     margin-left: -15px;
   }
-
 }

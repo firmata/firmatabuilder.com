@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2015-2016 Jeff Hoefs. All rights reserved.
+  Copyright (c) 2015-2017 Jeff Hoefs. All rights reserved.
 
   See file LICENSE-MIT for further informations on licensing terms.
 */
