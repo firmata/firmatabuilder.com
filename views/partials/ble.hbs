@@ -1,0 +1,48 @@
+<div id="bleConfig">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="bleController">BLE board</label>
+        <select name="bleController" class="controller form-control">
+          {{#each controllers.ble}}
+          <option value="{{@key}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="bleLocalName">Advertised local name</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="The local name the peripheral advertises to identify this board. If using multiple boards, set a unique local name for each board."> (?)</a>
+        <input type="text" class="form-control" name="bleLocalName" value="FIRMATA">
+      </div>
+    </div>
+  </div> <!-- end row 1 -->
+
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="form-group">
+        <label class="control-label" for="bleMinInterval">Min connection interval</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="The value is the time in milliseconds divided by 1.25, so for an interval of 7.5ms, enter a value of 6 (7.5 / 1.25 = 6). A value of 6 (7.5ms) is the absolute minimum value supported. 6 is the default value. Search 'BLE connection interval' for more info."> (?)</a>
+        <input type="number" class="form-control" id="bleMinInterval" name="bleMinInterval" min="6" max="3200" value="6">
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+      <div class="form-group">
+        <label class="control-label" for="bleMaxInterval">Max connection interval</label>
+        <a href="#" tabindex="-1" data-toggle="tooltip" data-placement="top" title data-original-title="The value is the time in milliseconds divided by 1.25 (30ms / 1.25 = 24). This value cannot be smaller than 6 or larger than 3200. 24 is the default value. Search 'BLE connection interval' for more info."> (?)</a>
+        <input type="number" class="form-control" id="bleMaxInterval" name="bleMaxInterval" min="6" max="3200" value="24">
+      </div>
+    </div>
+  </div> <!-- end row 2 -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alert alert-warning fb-issues" role="alert"><small>
+        RedBearLab BLE Nano support requires patching the RedBearLab nRF51822-Arduino core library. See steps 1 - 3 in <a href="https://gist.github.com/soundanalogous/d39bb3eb36333a0906df">this gist</a> for instructions.</small>
+      </div>
+    </div>
+  </div>
+</div>

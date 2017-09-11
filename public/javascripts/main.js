@@ -6,6 +6,7 @@ $(function () {
   var $submitBtn = $('#submit');
   var $connectionType = $('#connectionType');
   var $serialConfig = $('#serialConfig');
+  var $bleConfig = $('#bleConfig');
   var $ethernetConfig = $('#ethernetConfig');
   var $wifiConfig = $('#wifiConfig');
   var $macAddress = $('#macAddress');
@@ -111,17 +112,26 @@ $(function () {
     case "serial":
       $ethernetConfig.hide();
       $wifiConfig.hide();
+      $bleConfig.hide();
       $serialConfig.show();
       break;
     case "ethernet":
       $serialConfig.hide();
       $wifiConfig.hide();
+      $bleConfig.hide();
       $ethernetConfig.show();
       break;
     case "wifi":
       $serialConfig.hide();
       $ethernetConfig.hide();
+      $bleConfig.hide();
       $wifiConfig.show();
+      break;
+    case "ble":
+      $serialConfig.hide();
+      $ethernetConfig.hide();
+      $wifiConfig.hide();
+      $bleConfig.show();
       break;
     }
     connectionType = val;

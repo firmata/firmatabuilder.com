@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2015-2016 Jeff Hoefs. All rights reserved.
+  Copyright (c) 2015-2017 Jeff Hoefs. All rights reserved.
 
   See file LICENSE-MIT for further informations on licensing terms.
 */
@@ -78,6 +78,15 @@ var parseConnection = function (data) {
         gatewayIp: connection.gatewayIp,
         ssid: connection.ssid,
         securityType: getWiFiSecurityType(connection)
+      }
+    }
+  } else if (connection.connectionType === "ble") {
+    return {
+      ble: {
+        controller: connection.bleController,
+        localName: connection.bleLocalName,
+        minInterval: connection.bleMinInterval,
+        maxInterval: connection.bleMaxInterval
       }
     }
   }
