@@ -30,6 +30,6 @@ Until then, only the project admin (@soundanalogous) can deploy.
 ```
 cd /var/www/firmatabuilder.com
 git pull origin master
-npm update (only if there are changes to firmata-builder or other modules)
+npm install (only if there are changes to firmata-builder or other modules)
 pm2 restart app
 ```
