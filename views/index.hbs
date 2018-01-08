@@ -94,11 +94,16 @@
             </div>
             <div class="contrib-feature-block">
             <p>{{this.description}}</p>
-            <p>Dependencies:
+            <p>Dependencies:</p>
+            <ul>
               {{#each this.dependencies}}
-                <a target="_blank" href="{{this.url}}">{{this.className}} <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
+                <li><a target="_blank" href="{{this.url}}">{{this.name}} (v{{this.version}}) <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span><span class="sr-only">Download</span></a>
+                {{#if this.note}}
+                </br><i>{{this.note}}</i>
+                {{/if}}
+                </li>
               {{/each}}
-            </p>
+            </ul>
             </div>
           {{/each}}
         </div>
