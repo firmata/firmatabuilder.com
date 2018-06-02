@@ -13,7 +13,7 @@
     "cookie-parser": "~1.3.3",
     "debug": "~3.1.0",
     "express": "~4.16.2",
-    "firmata-builder": "^0.6.1",
+    "firmata-builder": "^0.6.2",
     "hbs": "~4.0.0",
     "lodash": "^3.9.1",
     "morgan": "~1.5.1",

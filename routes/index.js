@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2015-2017 Jeff Hoefs. All rights reserved.
+  Copyright (c) 2015-2018 Jeff Hoefs. All rights reserved.
 
   See file LICENSE-MIT for further informations on licensing terms.
 */
@@ -97,7 +97,7 @@ router.get('/', function (req, res, next) {
     coreFeatures: coreFeatures,
     contributedFeatures: contributedFeatures,
     controllers: builder.controllers,
-    version: {tag: "2.10.0", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.10.0"}
+    version: {tag: "2.10.1", url: "https://github.com/firmata/ConfigurableFirmata/releases/tag/2.10.1"}
   });
 });
 
